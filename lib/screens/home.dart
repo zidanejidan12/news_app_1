@@ -3,14 +3,13 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:hive/hive.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 part 'home.g.dart';
 
 class NewsDetailScreen extends StatelessWidget {
   final News news;
 
-  NewsDetailScreen({required this.news});
+  const NewsDetailScreen({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -24,26 +23,18 @@ class NewsDetailScreen extends StatelessWidget {
       ),
     );
   }
-
-  void _launchURL() async {
-    if (await canLaunch(news.url)) {
-      await launch(news.url);
-    } else {
-      throw 'Could not launch ${news.url}';
-    }
-  }
 }
 
 class WebViewScreen extends StatelessWidget {
   final String url;
 
-  WebViewScreen({required this.url});
+  const WebViewScreen({super.key, required this.url});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News Detail'),
+        title: const Text('News Detail'),
       ),
       body: WebView(
         initialUrl: url,
