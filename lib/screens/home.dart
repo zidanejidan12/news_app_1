@@ -18,11 +18,9 @@ class NewsDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(news.title),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: _launchURL,
-          child: Text('Open News'),
-        ),
+      body: WebView(
+        initialUrl: news.url,
+        javascriptMode: JavascriptMode.unrestricted,
       ),
     );
   }
@@ -33,6 +31,25 @@ class NewsDetailScreen extends StatelessWidget {
     } else {
       throw 'Could not launch ${news.url}';
     }
+  }
+}
+
+class WebViewScreen extends StatelessWidget {
+  final String url;
+
+  WebViewScreen({required this.url});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('News Detail'),
+      ),
+      body: WebView(
+        initialUrl: url,
+        javascriptMode: JavascriptMode.unrestricted,
+      ),
+    );
   }
 }
 
@@ -207,7 +224,7 @@ class _NewsScreenState extends State<NewsScreen>
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    NewsDetailScreen(news: favoriteNewsList[index]),
+                    WebViewScreen(url: favoriteNewsList[index].url),
               ),
             );
           },
