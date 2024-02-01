@@ -108,7 +108,7 @@ class _NewsScreenState extends State<NewsScreen>
         news.isFavorite = favoriteNewsBox.values
             .any((favoriteNews) => favoriteNews.title == news.title);
         newsList.add(news);
-        if (newsList.length == 5) {
+        if (newsList.length == 10) {
           break;
         }
       }
